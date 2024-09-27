@@ -36,7 +36,7 @@ export const interceptors: HttpInterceptorFn = (
     },
   });
 
-  runIf(showLoading, () => console.log('Spinner start'));
+//   runIf(showLoading, () => console.log('Spinner start'));
 
   return next(req).pipe(
     tap({
