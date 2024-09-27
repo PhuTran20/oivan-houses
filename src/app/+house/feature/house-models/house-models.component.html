@@ -1,0 +1,33 @@
+<ul nz-menu nzMode="inline" class="w-60">
+  <ng-container *ngIf="listHouseModels$ | async as houseModels">
+    <ng-container *ngFor="let houseModel of houseModels">
+      <li
+        nz-submenu
+        [(nzOpen)]="openMap[houseModel.attributes.model]"
+        (nzOpenChange)="openHandler(houseModel.attributes.model)"
+        nzTitle="{{houseModel.attributes.model}}"
+        class="border-b border-gray-200 leading-[2]"
+      >
+        <div class="house-model active p-6 border-b border-gray-200">
+          <div class="model-content flex flex-col md:flex-row mb-5">
+            <div class="flex-1 mb-4 md:mb-0">
+              <h2 class="text-3xl font-medium leading-8 mb-5">{{houseModel.attributes.media.title}}</h2>
+              <p class="text-gray-600 h-[100px] leading-[2]">{{houseModel.attributes.media.description}}</p>
+            </div>
+            <div class="model-image flex-1 w-[200px] h-[350px]">
+              <img src="https://images.pexels.com/photos/290275/pexels-photo-290275.jpeg?cs=srgb&dl=pexels-pixabay-290275.jpg&fm=jpg" alt="{{houseModel.attributes.media.banner}}" class="w-full h-full object-cover">
+            </div>
+          </div>
+          <oivan-houses 
+            [model]="houseModel.attributes.model" 
+            [blockNumber]="blockNumber" 
+            [landNumber]="landNumber" 
+            [minPrice]="minPrice" 
+            [maxPrice]="maxPrice"
+            class="mt-4"
+          ></oivan-houses>
+        </div>
+      </li>
+    </ng-container>
+  </ng-container>
+</ul>

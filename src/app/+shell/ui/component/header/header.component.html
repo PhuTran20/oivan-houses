@@ -1,0 +1,71 @@
+<header class="header bg-gray-100">
+    <div class="flex p-5 justify-between items-center container">
+        <h1 class="text-2xl font-bold">
+            <a routerLink="/home" class="text-3xl font-bold text-primary">Oivan Test</a>
+        </h1>
+        <div class="flex items-center space-x-4">
+            <!-- Button for small screens -->
+            <button nz-button nzType="primary" *ngIf="!isLogin()" class="lg:hidden text-white px-4 py-2 rounded" (click)="showLoginModal = true" nzSize="large">Login</button>
+            
+            <!-- Login form for larger screens -->
+            <div *ngIf="!isLogin(); else loggedInTemplate" class="hidden lg:flex items-center space-x-4">
+                <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="flex items-center relative space-x-4">
+                    <nz-form-item class="flex flex-col m-0">
+                        <nz-form-control
+                            [nzErrorTip]="loginForm.get('username')?.hasError('required') && loginForm.get('username')?.touched ? 'Please enter your username' : undefined">
+                            <input nz-input placeholder="Enter username" formControlName="username" class="border p-2 rounded w-64" />
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item class="flex flex-col m-0">
+                        <nz-form-control
+                            [nzErrorTip]="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched ? 'Please enter your password' : 
+                        loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched ? 'Password must be at least 6 characters' : undefined">
+                            <nz-input-group [nzSuffix]="suffixTemplate" class="pt-0 pb-0">
+                                <input [type]="(isVisible() ? 'text' : 'password')" nz-input placeholder="Enter password"
+                                    formControlName="password" class="border p-2 rounded w-64" />
+                            </nz-input-group>
+                            <ng-template #suffixTemplate>
+                                <span nz-icon [nzType]="(isVisible() ? 'eye-invisible' : 'eye')"
+                                    (click)="isVisible.set(!isVisible())"></span>
+                            </ng-template>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <button nz-button nzType="primary" class="text-white px-4 py-2 rounded" nzSize="large" [disabled]="loading$ | async" [nzLoading]="loading$ | async">Login</button>
+                </form>
+            </div>
+        </div>
+        <ng-template #loggedInTemplate>
+            <button nz-button nzType="primary" class="text-white px-4 py-2 rounded" nzSize="large" (click)="onLogout()" [disabled]="loading$ | async" [nzLoading]="loading$ | async">Logout</button>
+        </ng-template>
+    </div>
+</header>
+
+<!-- Modal for small screens -->
+<nz-modal [(nzVisible)]="showLoginModal" nzTitle="Login" (nzOnCancel)="showLoginModal = false" (nzOnOk)="onLogin()">
+    <ng-container *nzModalContent>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="flex flex-col gap-6">
+            <nz-form-item class="flex flex-col m-0">
+                <nz-form-label>Username</nz-form-label>
+                <nz-form-control
+                    [nzErrorTip]="loginForm.get('username')?.hasError('required') && loginForm.get('username')?.touched ? 'Please enter your username' : undefined">
+                    <input nz-input placeholder="Enter username" formControlName="username" class="border p-2 rounded w-full" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item class="flex flex-col m-0">
+                <nz-form-label>Password</nz-form-label>
+                <nz-form-control
+                    [nzErrorTip]="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched ? 'Please enter your password' : 
+                loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched ? 'Password must be at least 6 characters' : undefined">
+                    <nz-input-group [nzSuffix]="suffixTemplate" class="pt-0 pb-0">
+                        <input [type]="(isVisible() ? 'text' : 'password')" nz-input placeholder="Enter password"
+                            formControlName="password" class="border p-2 rounded w-full" />
+                    </nz-input-group>
+                    <ng-template #suffixTemplate>
+                        <span nz-icon [nzType]="(isVisible() ? 'eye-invisible' : 'eye')"
+                            (click)="isVisible.set(!isVisible())"></span>
+                    </ng-template>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-container>
+</nz-modal>

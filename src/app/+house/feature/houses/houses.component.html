@@ -1,0 +1,36 @@
+<div class="w-full overflow-x-auto">
+    <nz-table 
+        #basicTable 
+        [nzData]="(listHouses$ | async) ?? []" 
+        [nzShowPagination]="true" 
+        [nzPageIndex]="pageIndex" 
+        [nzPageSize]="10"
+        class="min-w-full overflow-scroll always-show-scrollbar">
+        <thead class="bg-gray-100">
+            <tr>
+                <th>House Number</th>
+                <th>Price</th>
+                <th>Block Number</th>
+                <th>Land Number</th>
+                <th>House Type</th>
+                <th>Model</th>
+                <th>Status</th>
+                <th *ngIf="isLogin()">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of basicTable.data;" class="border-b">
+                <td>{{ data.attributes.house_number }}</td>
+                <td>{{ data.attributes.price }}</td>
+                <td>{{ data.attributes.block_number }}</td>
+                <td>{{ data.attributes.land_number }}</td>
+                <td>{{ data.attributes.house_type }}</td>
+                <td>{{ data.attributes.model }}</td>
+                <td>{{ data.attributes.status }}</td>
+                <td *ngIf="isLogin()">
+                    <a (click)="editHouse(data.id || '')" class="text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

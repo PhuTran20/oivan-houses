@@ -1,0 +1,16 @@
+/* Custom scrollbar styles */
+.always-show-scrollbar {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+}
+
+.always-show-scrollbar::-webkit-scrollbar {
+    -webkit-appearance: none;
+    height: 8px; /* Adjust the height of the scrollbar */
+}
+
+.always-show-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .5);
+    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}

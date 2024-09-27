@@ -1,0 +1,87 @@
+<form nz-form [formGroup]="houseForm" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-16 gap-y-4"
+    nzLayout="vertical">
+    <nz-form-item>
+        <nz-form-label class="w-28 text-left">House Number</nz-form-label>
+        <nz-form-control [nzErrorTip]="houseNumberErrorTpl">
+            <input nz-input formControlName="houseNumber" />
+            <ng-template #houseNumberErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">Please input house number!</ng-container>
+                <ng-container *ngIf="control.hasError('usedHouseNumber')">Your house number is already
+                    used</ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label class="w-28 text-left">Block number</nz-form-label>
+        <nz-form-control [nzErrorTip]="blockNumberErrorTpl">
+            <input nz-input formControlName="blockNumber" />
+            <ng-template #blockNumberErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">Please input block number!</ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label class="w-28 text-left">Land number</nz-form-label>
+        <nz-form-control [nzErrorTip]="landNumberErrorTpl">
+            <input nz-input formControlName="landNumber" />
+            <ng-template #landNumberErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">Please input land number!</ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label class="w-28 text-left">House type</nz-form-label>
+        <nz-form-control [nzErrorTip]="houseTypeErrorTpl">
+            <nz-select formControlName="houseType">
+                <ng-container *ngFor="let type of houseTypes">
+                    <nz-option nzValue={{type}} nzLabel={{type}}></nz-option>
+                </ng-container>
+            </nz-select>
+            <ng-template #houseTypeErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">Please select house type!</ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label class="w-28 text-left">House model</nz-form-label>
+        <nz-form-control [nzErrorTip]="houseModelErrorTpl">
+            <nz-select formControlName="houseModel">
+                <ng-container *ngFor="let model of houseModels">
+                    <nz-option nzValue={{model}} nzLabel={{model}}></nz-option>
+                </ng-container>
+            </nz-select>
+            <ng-template #houseModelErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">Please select house model!</ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label class="w-28 text-left">Price</nz-form-label>
+        <nz-form-control [nzErrorTip]="priceErrorTpl">
+            <nz-input-number class="w-full" formControlName="price" [nzMin]="1" [nzStep]="1000000"
+                [nzFormatter]="formatPrice" [nzParser]="parsePrice"></nz-input-number>
+            <ng-template #priceErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">Please input price!</ng-container>
+                <ng-container *ngIf="control.hasError('min')">Price must be at least 1!</ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label class="w-28 text-left">Status</nz-form-label>
+        <nz-form-control [nzErrorTip]="statusErrorTpl">
+            <nz-select formControlName="status">
+                <nz-option nzValue="available" nzLabel="Available"></nz-option>
+                <nz-option nzValue="booked" nzLabel="Booked"></nz-option>
+            </nz-select>
+            <ng-template #statusErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">Please select status!</ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+</form>

@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.header {
+    background-color: #f0f0f0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.login-form {
+    display: flex;
+    gap: 10px;
+}
+.content {
+    padding: 20px;
+}
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.house-model {
+    background-color: #e6e6e6;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.house-model.active {
+    background-color: #b3d9ff;
+}
+.model-content {
+    display: flex;
+    gap: 20px;
+}
+.model-image {
+    width: 300px;
+    height: 200px;
+    background-color: #ccc;
+}
+.house-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.house-table th, .house-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+.house-table th {
+    background-color: #f2f2f2;
+}

@@ -1,0 +1,32 @@
+<div class="content container">
+  <div class="filters flex flex-col-reverse md:flex-row items-center justify-between gap-4">
+    <div class="filter-group w-full md:w-3/4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <nz-select class="w-full" nzShowSearch nzAllowClear nzPlaceHolder="Select a block number" [(ngModel)]="selectedBlockNumber">
+        <ng-container *ngFor="let blockNumber of listBlockNumber">
+          <nz-option [nzLabel]="blockNumber" [nzValue]="blockNumber"></nz-option>
+        </ng-container>
+      </nz-select>
+      <nz-select class="w-full" nzShowSearch nzAllowClear nzPlaceHolder="Select a land number" [(ngModel)]="selectedLandNumber">
+        <ng-container *ngFor="let landNumber of listLandNumber">
+          <nz-option [nzLabel]="landNumber" [nzValue]="landNumber"></nz-option>
+        </ng-container>
+      </nz-select>
+      <nz-select class="select-pricing w-full" nzShowSearch nzAllowClear nzPlaceHolder="Min price" [(ngModel)]="selectedMinPrice" (ngModelChange)="onMinPriceChange($event)">
+        <ng-container *ngFor="let price of listPriceMin">
+          <nz-option [nzLabel]="price | number:'1.0-2'" [nzValue]="price"></nz-option>
+        </ng-container>
+      </nz-select>
+      <nz-select class="select-pricing w-full" nzShowSearch nzAllowClear nzPlaceHolder="Max price" [(ngModel)]="selectedMaxPrice" (ngModelChange)="onMaxPriceChange($event)">
+        <ng-container *ngFor="let price of listPriceMax">
+          <nz-option [nzLabel]="price | number:'1.0-2'" [nzValue]="price"></nz-option>
+        </ng-container>
+      </nz-select>
+    </div>
+    <div class="button-group w-full md:w-1/4 flex items-center justify-start md:justify-end md:mt-0">
+      <ng-container *ngIf="isLogin()">
+        <button class="w-22 md:w-auto" nz-button nzType="primary" nzSize="large" (click)="createHouse()">Create new house</button>
+      </ng-container>
+    </div>
+  </div>
+  <oivan-house-models class="mt-4" [blockNumber]="selectedBlockNumber" [landNumber]="selectedLandNumber" [minPrice]="selectedMinPrice" [maxPrice]="selectedMaxPrice"></oivan-house-models>
+</div>

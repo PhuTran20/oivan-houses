@@ -1,0 +1,7 @@
+form {
+    nz-form-item {
+        .ant-form-item-explain {    
+            @apply absolute -bottom-6
+        }
+    }
+}

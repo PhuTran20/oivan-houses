@@ -1,0 +1,16 @@
+button[nz-button] {
+  &.ant-btn .anticon.anticon-minus > svg,
+  &.ant-btn .anticon.anticon-plus > svg {
+    shape-rendering: geometricPrecision;
+  }
+  &.ant-btn-primary {
+    @apply bg-primary border-primary;
+  }
+
+  // @apply shadow
+}
+a[nz-button] {
+  &.ant-btn-link {
+    @apply text-primary;
+  }
+}
